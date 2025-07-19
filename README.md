@@ -9,7 +9,9 @@ docker run -itd --net=host --shm-size=10g --privileged --name mindie_qw \
 	-v ***/config2.json:/usr/local/Ascend/mindie/latest/mindie-service/conf/config.json \
 	swr.cn-south-1.myhuaweicloud.com/ascendhub/mindie:2.0.RC2-300I-Duo-py311-openeuler24.03-lts \
 	/bin/bash
+ 
 根据https://www.hiascend.com/document/detail/zh/mindie/20RC2/envdeployment/instg/mindie_instg_0026.html
+
 1.设置
 chmod 750 mindie-service
 chmod -R 550 mindie-service/bin
@@ -25,16 +27,21 @@ chmod 750 mindie-service/conf
 chmod 640 mindie-service/conf/config.json
 chmod 700 mindie-service/security
 chmod -R 700 mindie-service/security/*
+
 2.设置
 chmod +w set_env.sh 
 source /usr/local/Ascend/ascend-toolkit/set_env.sh                                 # CANN
 source /usr/local/Ascend/nnal/atb/set_env.sh                                       # ATB
 source /usr/local/Ascend/atb-models/set_env.sh                                # ATB Models
 source mindie-service/set_env.sh
+
 3.修改/PTM/Qwen3-8B config文件权限
+
 4.pip更新transformers 4.51.0
+
 5.将【/usr/local/Ascend/atb-models】改名，这里改为【atb-models.bak】
 将附件【atb-models.tar.gz】解压，把解压后的【atb-models】复制到【/usr/local/Ascend/】
+
 6. ./bin/mindieservice_daemon
 启动后可以通过访问得到结果
 curl -X POST http://ip:port/v1/chat/completions ^
